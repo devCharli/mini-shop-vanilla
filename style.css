@@ -19,10 +19,11 @@ body {
 
 .container {
   width: 480px;
-  height: auto;
+  height: 90vh;
   padding: 1rem;
   background-color: rgb(9, 9, 9);
   border-radius: 0.4rem;
+  overflow-y: scroll;
 }
 
 ul {

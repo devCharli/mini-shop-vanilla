@@ -7,12 +7,14 @@ const pinkBtn = document.querySelector(".pink");
 const yellowBtn = document.querySelector(".yellow");
 const logo = document.querySelector(".logo");
 
+// fetching data from json
 async function fetchData() {
   const res = await fetch("db.json");
   const data = await res.json();
   return data.clothings;
 }
 
+// func for displaying clothes
 function displayCloths(arr) {
   for (let item of arr) {
     const clothingBox = document.createElement("div");
@@ -26,6 +28,8 @@ function displayCloths(arr) {
     clothingContainer.append(clothingBox);
   }
 }
+
+// init
 async function init() {
   const clothings = await fetchData();
   displayCloths(clothings);
@@ -40,6 +44,7 @@ async function filterByType(type) {
   displayCloths(newArr);
 }
 
+// filter func
 async function filterByColor(color) {
   const clothings = await fetchData();
   const newArr = clothings.filter((c) => c.color === color);
@@ -47,89 +52,29 @@ async function filterByColor(color) {
   displayCloths(newArr);
 }
 
-shirtBtn.addEventListener("click", () => {
-  filterByType("shirt");
-});
-pantsBtn.addEventListener("click", () => {
-  filterByType("pants");
-});
-skirtBtn.addEventListener("click", () => {
-  filterByType("skirt");
-});
+// click event func
 
-blueBtn.addEventListener("click", () => {
-  filterByColor("blue");
-});
+const showClothesByType = (btn, type) => {
+  btn.addEventListener("click", () => {
+    filterByType(type);
+  });
+};
 
-pinkBtn.addEventListener("click", () => {
-  filterByColor("pink");
-});
+const showClothesByColor = (btn, color) => {
+  btn.addEventListener("click", () => {
+    filterByColor(color);
+  });
+};
 
-yellowBtn.addEventListener("click", () => {
-  filterByColor("yellow");
-});
+showClothesByType(shirtBtn, "shirt");
+showClothesByType(pantsBtn, "pants");
+showClothesByType(skirtBtn, "skirt");
+showClothesByColor(blueBtn, "blue");
+showClothesByColor(pinkBtn, "pink");
+showClothesByColor(yellowBtn, "yellow");
 
+// logo click event
 logo.addEventListener("click", () => {
   document.querySelector(".clothings").innerHTML = "";
   init();
 });
-
-// const clothings = [
-//   {
-//     title: "man, small size",
-//     type: "pants",
-//     img: "./images/blue_p.png",
-//     color: "blue",
-//   },
-//   {
-//     title: "woman, medium size",
-//     type: "pants",
-//     img: "./images/pink_p.png",
-//     color: "pink",
-//   },
-//   {
-//     title: "man, large size",
-//     type: "shirt",
-//     img: "./images/yellow_t.png",
-//     color: "yellow",
-//   },
-
-//   {
-//     title: "man, large size",
-//     type: "shirt",
-//     img: "./images/blue_t.png",
-//     color: "blue",
-//   },
-
-//   {
-//     title: "woman, small size",
-//     type: "skirt",
-//     img: "./images/pink_s.png",
-//     color: "pink",
-//   },
-//   {
-//     title: "man, small size",
-//     type: "pants",
-//     img: "./images/yellow_p.png",
-//     color: "yellow",
-//   },
-//   {
-//     title: "woman, small size",
-//     type: "skirt",
-//     img: "./images/blue_s.png",
-//     color: "blue",
-//   },
-//   {
-//     title: "woman, small size",
-//     type: "shirt",
-//     img: "./images/pink_t.png",
-//     color: "pink",
-//   },
-
-//   {
-//     title: "woman, medium size",
-//     type: "skirt",
-//     img: "./images/yellow_s.png",
-//     color: "yellow",
-//   },
-// ];
